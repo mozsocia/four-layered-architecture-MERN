@@ -1,5 +1,5 @@
 const TaskRepository = require('../repositories/task.repository');
-const UserRepository = require('../repositories/auth.repository')
+const AuthRepository = require('../repositories/auth.repository')
 
 
 
@@ -12,8 +12,14 @@ class TaskBusiness {
 
   // Create a new task
   async createTask(task, userId) {
+
+    // Validate the task data
+    if (!taskData.name || !taskData.description || !taskData.dueDate) {
+      throw new Error('Task data is invalid');
+    }
+
     // Check if the user is an admin
-    const user = await UserRepository.findUserById(userId);
+    const user = await AuthRepository.findUserById(userId);
     if (!user || !user.isAdmin) {
       throw new Error('Unauthorized');
     }
@@ -29,8 +35,13 @@ class TaskBusiness {
 
   // Update a task
   async updateTask(id, task, userId) {
+
+    // Validate the task data
+    if (!taskData.name || !taskData.description || !taskData.dueDate) {
+      throw new Error('Task data is invalid');
+    }
     // Check if the user is an admin
-    const user = await UserRepository.findUserById(userId);
+    const user = await AuthRepository.findUserById(userId);
     if (!user || !user.isAdmin) {
       throw new Error('Unauthorized');
     }
@@ -42,7 +53,7 @@ class TaskBusiness {
   // Delete a task
   async deleteTask(id, userId) {
     // Check if the user is an admin
-    const user = await UserRepository.findUserById(userId);
+    const user = await AuthRepository.findUserById(userId);
     if (!user || !user.isAdmin) {
       throw new Error('Unauthorized');
     }
@@ -78,7 +89,7 @@ class TaskBusiness {
     }
 
     // Check if the user is an admin
-    const user = await UserRepository.findUserById(userId);
+    const user = await AuthRepository.findUserById(userId);
     if (!user || !user.isAdmin) {
       throw new Error('Unauthorized');
     }
@@ -95,7 +106,7 @@ class TaskBusiness {
     }
 
     // Check if the user is an admin
-    const user = await UserRepository.findUserById(userId);
+    const user = await AuthRepository.findUserById(userId);
     if (!user || !user.isAdmin) {
       throw new Error('Unauthorized');
     }
@@ -108,7 +119,7 @@ class TaskBusiness {
 
 
     // Check if the user is an admin
-    const user = await UserRepository.findUserById(userId);
+    const user = await AuthRepository.findUserById(userId);
     if (!user || !user.isAdmin) {
       throw new Error('Unauthorized');
     }

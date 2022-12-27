@@ -11,6 +11,11 @@ const taskSchema = new mongoose.Schema({
   },
   dueDate: {
     type: Date,
+    required: false
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true
   }
 });

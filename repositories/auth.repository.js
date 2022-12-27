@@ -11,6 +11,11 @@ class AuthRepository {
     return await User.findOne({ username });
   }
 
+  async findUserById(id) {
+    return await User.findById(id);
+  }
+
+
   // Check the password for a given user
   async checkPassword(user, password) {
     return await user.comparePassword(password);
